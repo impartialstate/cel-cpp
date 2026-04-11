@@ -67,6 +67,19 @@ void* AlignedNew(size_t size, std::align_val_t alignment) {
     ThrowStdBadAlloc();
   }
   return ptr;
+#elif defined(__APPLE__)
+  if (__builtin_available(macOS 10.15, *)) {
+    void* ptr = std::aligned_alloc(static_cast<size_t>(alignment), size);
+    if (ABSL_PREDICT_FALSE(size != 0 && ptr == nullptr)) {
+      ThrowStdBadAlloc();
+    }
+    return ptr;
+  }
+  void* ptr;
+  if (ABSL_PREDICT_FALSE(posix_memalign(&ptr, static_cast<size_t>(alignment), size) != 0)) {
+    ThrowStdBadAlloc();
+  }
+  return ptr;
 #else
   void* ptr = std::aligned_alloc(static_cast<size_t>(alignment), size);
   if (ABSL_PREDICT_FALSE(size != 0 && ptr == nullptr)) {
@@ -107,7 +120,7 @@ void AlignedDelete(void* ptr, std::align_val_t alignment) noexcept {
   ::operator delete(ptr, alignment);
 #else
   if (static_cast<size_t>(alignment) <= kDefaultNewAlignment) {
-    Delete(ptr, size);
+    Delete(ptr);
   } else {
 #if defined(_MSC_VER)
     _aligned_free(ptr);
