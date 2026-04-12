@@ -103,5 +103,5 @@ http_jar(
 
 bazel_dep(
     name = "yaml-cpp",
-    version = "0.8.0",
+    version = "0.9.0",
 )
