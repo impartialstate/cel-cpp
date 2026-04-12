@@ -544,13 +544,13 @@ TEST_F(BuiltinsTest, TestDurationFunctions) {
   ref.set_seconds(93541L);
   ref.set_nanos(11000000L);
 
-  TestFunctions(builtin::kHours, CelProtoWrapper::CreateDuration(&ref), 25L);
+  TestFunctions(builtin::kHours, CelProtoWrapper::CreateDuration(&ref), int64_t{25});
   TestFunctions(builtin::kMinutes, CelProtoWrapper::CreateDuration(&ref),
-                1559L);
+                int64_t{1559});
   TestFunctions(builtin::kSeconds, CelProtoWrapper::CreateDuration(&ref),
-                93541L);
+                int64_t{93541});
   TestFunctions(builtin::kMilliseconds, CelProtoWrapper::CreateDuration(&ref),
-                11L);
+                int64_t{11});
 
   std::string result = "93541.011s";
   TestTypeConverts(builtin::kString, CelProtoWrapper::CreateDuration(&ref),
@@ -595,18 +595,18 @@ TEST_F(BuiltinsTest, TestTimestampFunctions) {
   ref.set_seconds(1L);
   ref.set_nanos(11000000L);
   TestFunctions(builtin::kFullYear, CelProtoWrapper::CreateTimestamp(&ref),
-                1970L);
-  TestFunctions(builtin::kMonth, CelProtoWrapper::CreateTimestamp(&ref), 0L);
+                int64_t{1970});
+  TestFunctions(builtin::kMonth, CelProtoWrapper::CreateTimestamp(&ref), int64_t{0});
   TestFunctions(builtin::kDayOfYear, CelProtoWrapper::CreateTimestamp(&ref),
-                0L);
+                int64_t{0});
   TestFunctions(builtin::kDayOfMonth, CelProtoWrapper::CreateTimestamp(&ref),
-                0L);
-  TestFunctions(builtin::kDate, CelProtoWrapper::CreateTimestamp(&ref), 1L);
-  TestFunctions(builtin::kHours, CelProtoWrapper::CreateTimestamp(&ref), 0L);
-  TestFunctions(builtin::kMinutes, CelProtoWrapper::CreateTimestamp(&ref), 0L);
-  TestFunctions(builtin::kSeconds, CelProtoWrapper::CreateTimestamp(&ref), 1L);
+                int64_t{0});
+  TestFunctions(builtin::kDate, CelProtoWrapper::CreateTimestamp(&ref), int64_t{1});
+  TestFunctions(builtin::kHours, CelProtoWrapper::CreateTimestamp(&ref), int64_t{0});
+  TestFunctions(builtin::kMinutes, CelProtoWrapper::CreateTimestamp(&ref), int64_t{0});
+  TestFunctions(builtin::kSeconds, CelProtoWrapper::CreateTimestamp(&ref), int64_t{1});
   TestFunctions(builtin::kMilliseconds, CelProtoWrapper::CreateTimestamp(&ref),
-                11L);
+                int64_t{11});
 
   ref.set_seconds(259200L);
   ref.set_nanos(0L);
@@ -775,33 +775,33 @@ TEST_F(BuiltinsTest, TestDoubleConversionError_stringInvalid) {
 
 TEST_F(BuiltinsTest, TestDynConversions) {
   TestTypeConverts(builtin::kDyn, CelValue::CreateDouble(100.1), 100.1);
-  TestTypeConverts(builtin::kDyn, CelValue::CreateInt64(100L), 100L);
-  TestTypeConverts(builtin::kDyn, CelValue::CreateUint64(100UL), 100UL);
+  TestTypeConverts(builtin::kDyn, CelValue::CreateInt64(100L), int64_t{100});
+  TestTypeConverts(builtin::kDyn, CelValue::CreateUint64(100UL), uint64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestIntConversions_int) {
-  TestTypeConverts(builtin::kInt, CelValue::CreateInt64(100L), 100L);
+  TestTypeConverts(builtin::kInt, CelValue::CreateInt64(100L), int64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestIntConversions_Timestamp) {
   Timestamp ref;
   ref.set_seconds(100);
-  TestTypeConverts(builtin::kInt, CelProtoWrapper::CreateTimestamp(&ref), 100L);
+  TestTypeConverts(builtin::kInt, CelProtoWrapper::CreateTimestamp(&ref), int64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestIntConversions_double) {
   double ref = 100.1;
-  TestTypeConverts(builtin::kInt, CelValue::CreateDouble(ref), 100L);
+  TestTypeConverts(builtin::kInt, CelValue::CreateDouble(ref), int64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestIntConversions_string) {
   std::string ref = "100";
-  TestTypeConverts(builtin::kInt, CelValue::CreateString(&ref), 100L);
+  TestTypeConverts(builtin::kInt, CelValue::CreateString(&ref), int64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestIntConversions_uint) {
   uint64_t ref = 100;
-  TestTypeConverts(builtin::kInt, CelValue::CreateUint64(ref), 100L);
+  TestTypeConverts(builtin::kInt, CelValue::CreateUint64(ref), int64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestIntConversions_doubleIntMin) {
@@ -874,21 +874,21 @@ TEST_F(BuiltinsTest, TestIntConversionError_uintRange) {
 
 TEST_F(BuiltinsTest, TestUintConversions_double) {
   double ref = 100.1;
-  TestTypeConverts(builtin::kUint, CelValue::CreateDouble(ref), 100UL);
+  TestTypeConverts(builtin::kUint, CelValue::CreateDouble(ref), uint64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestUintConversions_int) {
   int64_t ref = 100L;
-  TestTypeConverts(builtin::kUint, CelValue::CreateInt64(ref), 100UL);
+  TestTypeConverts(builtin::kUint, CelValue::CreateInt64(ref), uint64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestUintConversions_string) {
   std::string ref = "100";
-  TestTypeConverts(builtin::kUint, CelValue::CreateString(&ref), 100UL);
+  TestTypeConverts(builtin::kUint, CelValue::CreateString(&ref), uint64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestUintConversions_uint) {
-  TestTypeConverts(builtin::kUint, CelValue::CreateUint64(100UL), 100UL);
+  TestTypeConverts(builtin::kUint, CelValue::CreateUint64(100UL), uint64_t{100});
 }
 
 TEST_F(BuiltinsTest, TestUintConversionError_doubleNegRange) {

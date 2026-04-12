@@ -3,7 +3,7 @@
 #
 
 load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
-load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_cc//cc:cc_library.bzl", "cc_library")
 load("@rules_cc//cc:cc_test.bzl", "cc_test")
 
@@ -18,7 +18,10 @@ cc_test(
     srcs = [
         "benchmark_test.cc",
     ],
-    tags = ["benchmark"],
+    tags = [
+        "benchmark",
+        "manual",
+    ],
     deps = [
         ":request_context_cc_proto",
         "//eval/public:activation",
@@ -52,7 +55,10 @@ cc_test(
     srcs = [
         "modern_benchmark_test.cc",
     ],
-    tags = ["benchmark"],
+    tags = [
+        "benchmark",
+        "manual",
+    ],
     deps = [
         ":request_context_cc_proto",
         "//common:allocator",
@@ -151,7 +157,10 @@ cc_test(
     srcs = [
         "expression_builder_benchmark_test.cc",
     ],
-    tags = ["benchmark"],
+    tags = [
+        "benchmark",
+        "manual",
+    ],
     deps = [
         ":request_context_cc_proto",
         "//common:minimal_descriptor_pool",
