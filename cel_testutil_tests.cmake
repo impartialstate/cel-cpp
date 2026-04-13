@@ -1,0 +1,38 @@
+# --- testutil tests ---
+
+cel_cc_test(
+  testutil_baseline_tests_test
+  SRCS
+    testutil/baseline_tests_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  testutil_expr_printer_test
+  SRCS
+    testutil/expr_printer_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "internal/testing.h"
+#include "absl/strings/str_cat.h"
 
 namespace cel::internal {
 

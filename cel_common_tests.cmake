@@ -1,0 +1,1658 @@
+# --- common tests ---
+
+cel_cc_test(
+  common_allocator_test
+  SRCS
+    common/allocator_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_any_test
+  SRCS
+    common/any_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_arena_string_pool_test
+  SRCS
+    common/arena_string_pool_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_arena_string_test
+  SRCS
+    common/arena_string_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_arena_string_view_test
+  SRCS
+    common/arena_string_view_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_ast_expr_proto_test
+  SRCS
+    common/ast/expr_proto_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_ast_metadata_test
+  SRCS
+    common/ast/metadata_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_ast_navigable_ast_internal_test
+  SRCS
+    common/ast/navigable_ast_internal_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_ast_proto_test
+  SRCS
+    common/ast_proto_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_ast_rewrite_test
+  SRCS
+    common/ast_rewrite_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_ast_test
+  SRCS
+    common/ast_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_ast_traverse_test
+  SRCS
+    common/ast_traverse_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_constant_test
+  SRCS
+    common/constant_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_data_test
+  SRCS
+    common/data_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_decl_proto_test
+  SRCS
+    common/decl_proto_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_decl_test
+  SRCS
+    common/decl_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_expr_test
+  SRCS
+    common/expr_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_internal_byte_string_test
+  SRCS
+    common/internal/byte_string_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_internal_reference_count_test
+  SRCS
+    common/internal/reference_count_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_kind_test
+  SRCS
+    common/kind_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_memory_test
+  SRCS
+    common/memory_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_minimal_descriptor_database_test
+  SRCS
+    common/minimal_descriptor_database_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_minimal_descriptor_pool_test
+  SRCS
+    common/minimal_descriptor_pool_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_navigable_ast_test
+  SRCS
+    common/navigable_ast_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_reference_test
+  SRCS
+    common/reference_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_source_test
+  SRCS
+    common/source_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_type_proto_test
+  SRCS
+    common/type_proto_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_type_reflector_test
+  SRCS
+    common/type_reflector_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_type_test
+  SRCS
+    common/type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_typeinfo_test
+  SRCS
+    common/typeinfo_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_any_type_test
+  SRCS
+    common/types/any_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_basic_struct_type_test
+  SRCS
+    common/types/basic_struct_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_bool_type_test
+  SRCS
+    common/types/bool_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_bool_wrapper_type_test
+  SRCS
+    common/types/bool_wrapper_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_bytes_type_test
+  SRCS
+    common/types/bytes_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_bytes_wrapper_type_test
+  SRCS
+    common/types/bytes_wrapper_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_double_type_test
+  SRCS
+    common/types/double_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_double_wrapper_type_test
+  SRCS
+    common/types/double_wrapper_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_duration_type_test
+  SRCS
+    common/types/duration_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_dyn_type_test
+  SRCS
+    common/types/dyn_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_enum_type_test
+  SRCS
+    common/types/enum_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_error_type_test
+  SRCS
+    common/types/error_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_function_type_test
+  SRCS
+    common/types/function_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_int_type_test
+  SRCS
+    common/types/int_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_int_wrapper_type_test
+  SRCS
+    common/types/int_wrapper_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_list_type_test
+  SRCS
+    common/types/list_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_map_type_test
+  SRCS
+    common/types/map_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_message_type_test
+  SRCS
+    common/types/message_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_null_type_test
+  SRCS
+    common/types/null_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_opaque_type_test
+  SRCS
+    common/types/opaque_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_optional_type_test
+  SRCS
+    common/types/optional_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_string_type_test
+  SRCS
+    common/types/string_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_string_wrapper_type_test
+  SRCS
+    common/types/string_wrapper_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_struct_type_test
+  SRCS
+    common/types/struct_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_timestamp_type_test
+  SRCS
+    common/types/timestamp_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_type_param_type_test
+  SRCS
+    common/types/type_param_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_type_pool_test
+  SRCS
+    common/types/type_pool_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_type_type_test
+  SRCS
+    common/types/type_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_uint_type_test
+  SRCS
+    common/types/uint_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_uint_wrapper_type_test
+  SRCS
+    common/types/uint_wrapper_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_types_unknown_type_test
+  SRCS
+    common/types/unknown_type_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_value_test
+  SRCS
+    common/value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_value_testing_test
+  SRCS
+    common/value_testing_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_bool_value_test
+  SRCS
+    common/values/bool_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_bytes_value_test
+  SRCS
+    common/values/bytes_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_custom_list_value_test
+  SRCS
+    common/values/custom_list_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_custom_map_value_test
+  SRCS
+    common/values/custom_map_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_custom_struct_value_test
+  SRCS
+    common/values/custom_struct_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_double_value_test
+  SRCS
+    common/values/double_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_duration_value_test
+  SRCS
+    common/values/duration_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_error_value_test
+  SRCS
+    common/values/error_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_int_value_test
+  SRCS
+    common/values/int_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_list_value_test
+  SRCS
+    common/values/list_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_map_value_test
+  SRCS
+    common/values/map_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_message_value_test
+  SRCS
+    common/values/message_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_mutable_list_value_test
+  SRCS
+    common/values/mutable_list_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_mutable_map_value_test
+  SRCS
+    common/values/mutable_map_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_null_value_test
+  SRCS
+    common/values/null_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_optional_value_test
+  SRCS
+    common/values/optional_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_parsed_json_list_value_test
+  SRCS
+    common/values/parsed_json_list_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_parsed_json_map_value_test
+  SRCS
+    common/values/parsed_json_map_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_parsed_json_value_test
+  SRCS
+    common/values/parsed_json_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_parsed_map_field_value_test
+  SRCS
+    common/values/parsed_map_field_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_parsed_message_value_test
+  SRCS
+    common/values/parsed_message_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_parsed_repeated_field_value_test
+  SRCS
+    common/values/parsed_repeated_field_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_string_value_test
+  SRCS
+    common/values/string_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_struct_value_test
+  SRCS
+    common/values/struct_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_timestamp_value_test
+  SRCS
+    common/values/timestamp_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_type_value_test
+  SRCS
+    common/values/type_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_uint_value_test
+  SRCS
+    common/values/uint_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_unknown_value_test
+  SRCS
+    common/values/unknown_value_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)
+cel_cc_test(
+  common_values_value_variant_test
+  SRCS
+    common/values/value_variant_test.cc
+  DEPS
+    cel_common
+    cel_runtime
+    cel_checker
+    cel_parser
+    cel_extensions
+    cel_compiler
+    cel_validator
+    cel_env
+    cel_tools
+    cel_testutil
+    cel_checker_internal_testing
+    cel_internal_testing
+)

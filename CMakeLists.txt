@@ -13,6 +13,28 @@ endif()
 
 include(FetchContent)
 set(FETCHCONTENT_QUIET OFF)
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
+
+# --- Options ---
+option(BUILD_TESTING "Build the tests" OFF)
+
+if(BUILD_TESTING)
+  include(CTest)
+  enable_testing()
+endif()
+
+# --- Googletest ---
+if(BUILD_TESTING)
+  FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        v1.17.0
+  )
+  # For Windows: GTest might need these
+  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+  FetchContent_MakeAvailable(googletest)
+endif()
 
 # --- Abseil ---
 FetchContent_Declare(
@@ -21,14 +43,23 @@ FetchContent_Declare(
   GIT_TAG        20260107.1
 )
 set(ABSL_PROPAGATE_CXX_STD ON CACHE BOOL "" FORCE)
-set(ABSL_ENABLE_INSTALL ON CACHE BOOL "" FORCE)
+set(ABSL_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+set(ABSL_BUILD_TESTING OFF CACHE BOOL "" FORCE)
+if(BUILD_TESTING)
+  set(ABSL_BUILD_TEST_HELPERS ON CACHE BOOL "" FORCE)
+  set(ABSL_USE_EXTERNAL_GOOGLETEST ON CACHE BOOL "" FORCE)
+else()
+  set(ABSL_BUILD_TEST_HELPERS OFF CACHE BOOL "" FORCE)
+  set(ABSL_USE_EXTERNAL_GOOGLETEST OFF CACHE BOOL "" FORCE)
+endif()
+set(ABSL_FIND_GOOGLETEST OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(absl)
 
 # --- Protobuf ---
 FetchContent_Declare(
   protobuf
   GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-  GIT_TAG        v34.1
+  GIT_TAG        v33.4
 )
 set(protobuf_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(protobuf_INSTALL OFF CACHE BOOL "" FORCE)
@@ -42,6 +73,7 @@ FetchContent_Declare(
   GIT_TAG        2025-11-05
 )
 set(RE2_BUILD_TESTING OFF CACHE BOOL "" FORCE)
+set(RE2_INSTALL OFF CACHE BOOL "" FORCE)
 # RE2 doesn't have an ENABLE_INSTALL, we'll just ignore the errors if possible
 # or try to satisfy it.
 FetchContent_MakeAvailable(re2)
@@ -197,10 +229,63 @@ add_custom_command(
   COMMENT "Embedding minimal descriptor set"
 )
 
-# --- Fix for absl_nonnull ---
-add_definitions(-Dabsl_nonnull=)
-add_definitions(-Dabsl_nullable=)
-add_definitions(-Dabsl_nullability_unknown=)
+# Testing descriptor set
+set(TESTING_DESCRIPTOR_SET "${CMAKE_CURRENT_BINARY_DIR}/internal/testing_descriptor_set.pb")
+set(TESTING_DESCRIPTOR_SET_INC "${CMAKE_CURRENT_BINARY_DIR}/internal/testing_descriptor_set_embed.inc")
+add_custom_command(
+  OUTPUT ${TESTING_DESCRIPTOR_SET}
+  COMMAND $<TARGET_FILE:protobuf::protoc> --descriptor_set_out=${TESTING_DESCRIPTOR_SET} 
+          --include_imports
+          -I${protobuf_SOURCE_DIR}/src
+          -I${cel_spec_SOURCE_DIR}/proto
+          -I${CMAKE_CURRENT_SOURCE_DIR}
+          ${cel_spec_SOURCE_DIR}/proto/cel/expr/conformance/proto2/test_all_types.proto
+          ${cel_spec_SOURCE_DIR}/proto/cel/expr/conformance/proto2/test_all_types_extensions.proto
+          ${cel_spec_SOURCE_DIR}/proto/cel/expr/conformance/proto3/test_all_types.proto
+          ${cel_spec_SOURCE_DIR}/proto/cel/expr/checked.proto
+          ${cel_spec_SOURCE_DIR}/proto/cel/expr/syntax.proto
+          ${cel_spec_SOURCE_DIR}/proto/cel/expr/value.proto
+          ${CMAKE_CURRENT_SOURCE_DIR}/eval/testutil/test_extensions.proto
+          ${CMAKE_CURRENT_SOURCE_DIR}/eval/testutil/test_message.proto
+          ${CMAKE_CURRENT_SOURCE_DIR}/testutil/test_json_names.proto
+  DEPENDS protobuf::protoc
+  COMMENT "Generating testing descriptor set"
+)
+
+add_custom_command(
+  OUTPUT ${TESTING_DESCRIPTOR_SET_INC}
+  COMMAND $<TARGET_FILE:cel_cc_embed> --in=${TESTING_DESCRIPTOR_SET} --out=${TESTING_DESCRIPTOR_SET_INC}
+  DEPENDS cel_cc_embed ${TESTING_DESCRIPTOR_SET}
+  COMMENT "Embedding testing descriptor set"
+)
+
+# --- Helper for Tests ---
+if(BUILD_TESTING)
+  function(cel_cc_test NAME)
+    cmake_parse_arguments(ARG "" "" "SRCS;DEPS" ${ARGN})
+    add_executable(${NAME} ${ARG_SRCS})
+    target_link_libraries(${NAME} PRIVATE ${ARG_DEPS} GTest::gmock GTest::gtest_main)
+    add_test(NAME cel_${NAME} COMMAND ${NAME} WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+  endfunction()
+
+  add_library(cel_internal_testing STATIC 
+    internal/testing.cc
+    internal/testing_descriptor_pool.cc
+    internal/testing_message_factory.cc
+    internal/equals_text_proto.cc
+    extensions/protobuf/memory_manager.cc
+    runtime/internal/runtime_env_testing.cc
+    common/value_testing.cc
+    base/internal/memory_manager_testing.cc
+    eval/public/testing/matchers.cc
+    ${TESTING_DESCRIPTOR_SET_INC}
+  )
+  target_link_libraries(cel_internal_testing PUBLIC 
+    GTest::gmock GTest::gtest absl::status_matchers absl::strings absl::status
+    cel_internal cel_common
+  )
+  target_include_directories(cel_internal_testing PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+endif()
 
 # --- Components ---
 
@@ -220,9 +305,11 @@ set(CEL_INTERNAL_SRCS
   internal/message_equality.cc
   internal/overflow.cc
   internal/string_pool.cc
+  extensions/protobuf/internal/map_reflection.cc
+  extensions/protobuf/internal/qualify.cc
 )
 add_library(cel_internal ${CEL_INTERNAL_SRCS} ${EMPTY_DESCRIPTOR_SET_INC} ${MINIMAL_DESCRIPTOR_SET_INC})
-target_include_directories(cel_internal PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(cel_internal PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(cel_internal PUBLIC 
   absl::base absl::core_headers absl::status absl::strings absl::log absl::optional absl::no_destructor absl::any absl::variant absl::time 
   protobuf::libprotobuf googleapis_protos
@@ -306,4 +393,70 @@ add_library(cel_extensions STATIC ${CEL_EXTENSIONS_SRCS})
 target_include_directories(cel_extensions PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(cel_extensions PUBLIC cel_runtime cel_internal absl::base absl::status absl::strings absl::log)
 
-# Add more subdirectories or targets as needed.
+
+# compiler
+file(GLOB_RECURSE CEL_COMPILER_SRCS "compiler/*.cc")
+list(FILTER CEL_COMPILER_SRCS EXCLUDE REGEX ".*(test|benchmarks?|testing).*\\.cc$")
+add_library(cel_compiler STATIC ${CEL_COMPILER_SRCS})
+target_include_directories(cel_compiler PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+target_link_libraries(cel_compiler PUBLIC cel_checker cel_parser cel_common cel_internal absl::base absl::status absl::strings absl::log)
+
+# validator
+file(GLOB_RECURSE CEL_VALIDATOR_SRCS "validator/*.cc")
+list(FILTER CEL_VALIDATOR_SRCS EXCLUDE REGEX ".*(test|benchmarks?|testing).*\\.cc$")
+add_library(cel_validator STATIC ${CEL_VALIDATOR_SRCS})
+target_include_directories(cel_validator PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+target_link_libraries(cel_validator PUBLIC cel_common cel_internal absl::base absl::status absl::strings)
+
+# env
+file(GLOB_RECURSE CEL_ENV_SRCS "env/*.cc")
+list(FILTER CEL_ENV_SRCS EXCLUDE REGEX ".*(test|benchmarks?|testing).*\\.cc$")
+add_library(cel_env STATIC ${CEL_ENV_SRCS})
+target_include_directories(cel_env PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+target_link_libraries(cel_env PUBLIC cel_common cel_internal absl::base absl::status absl::strings yaml-cpp)
+
+# tools
+file(GLOB_RECURSE CEL_TOOLS_SRCS "tools/*.cc")
+list(FILTER CEL_TOOLS_SRCS EXCLUDE REGEX ".*(test|benchmarks?|testing).*\\.cc$")
+add_library(cel_tools STATIC ${CEL_TOOLS_SRCS})
+target_include_directories(cel_tools PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+target_link_libraries(cel_tools PUBLIC cel_common cel_internal absl::base absl::status absl::strings re2::re2 flatbuffers)
+
+# --- Test helper libraries ---
+
+if(BUILD_TESTING)
+  # testutil library (expr_printer used by parser tests)
+  
+  # testutil protos
+  protobuf_generate(
+    OUT_VAR TESTUTIL_PROTO_SRCS
+    PROTOS 
+      eval/tests/request_context.proto
+      eval/testutil/test_message.proto
+      eval/testutil/test_extensions.proto
+      testutil/test_json_names.proto
+    IMPORT_DIRS ${PROTO_IMPORT_DIRS}
+  )
+  add_library(cel_testutil STATIC testutil/expr_printer.cc testutil/baseline_tests.cc ${TESTUTIL_PROTO_SRCS})
+
+  target_include_directories(cel_testutil PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+  target_link_libraries(cel_testutil PUBLIC cel_common cel_internal absl::strings absl::log)
+
+  # checker internal testing helpers
+  add_library(cel_checker_internal_testing STATIC checker/internal/test_ast_helpers.cc)
+  target_include_directories(cel_checker_internal_testing PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+  target_link_libraries(cel_checker_internal_testing PUBLIC cel_checker cel_parser cel_common cel_internal absl::status)
+endif()
+
+# --- Tests ---
+if(BUILD_TESTING)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_checker_tests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_common_tests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_env_tests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_eval_tests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_extensions_tests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_runtime_tests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_testutil_tests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_tools_tests.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cel_validator_tests.cmake)
+endif()
