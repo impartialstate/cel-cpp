@@ -1,7 +1,4 @@
 common --enable_platform_specific_config
-build:macos --cxxopt=-mmacosx-version-min=10.15
-build:macos --linkopt=-mmacosx-version-min=10.15
-build:macos --cxxopt=-faligned-allocation
 build --java_runtime_version=remotejdk_17
 
 build --enable_bzlmod
